@@ -1,9 +1,11 @@
-import React from 'react'
+import React from 'react';
+import Header from './Header';
 
 function Contact() {
     return (
         <div>
-            <h1 style={{ marginTop: "10vh" }}>Contact</h1>
+            <Header/>
+            <h1>Contact</h1>
         </div>
     )
 }

@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import { getUserAsync } from '../Services/dataService';
 
+import Header from './Header';
+
 import { withStyles, Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -49,12 +51,13 @@ export default function Home() {
 
   console.log('data',data);
   useEffect(() => {
-    getUsers();
+    getUsers();  
   },[])
 
     return (
         <div>
-            <h2>Home</h2>
+            {/* <h2>Home</h2> */}
+            <Header />
             <TableContainer >
            <Table className={classes.table} aria-label="customized table">
              <TableHead>

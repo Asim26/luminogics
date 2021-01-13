@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 
 import { Grid, Paper, Avatar, Typography, TextField, 
-    Button, InputLabel, Link, Form } from '@material-ui/core'
+    Button, InputLabel, Link } from '@material-ui/core'
 import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
@@ -21,6 +21,11 @@ const Signup = () =>{
     const [password,setPassword]=useState("");
     const [cpassword,setcPassword]=useState("");
 
+    const [nameError,setNameError]=useState("");
+    const [emailError,setEmailError]=useState("");
+    
+    const [isSubmit,setIsSubmit]=useState(false);
+    
     // ternary opeartor
     //  name ? "" "Name is requured" : ""
     // css & styles
@@ -28,6 +33,9 @@ const Signup = () =>{
     const headerStyle = { margin: 0 }
     const avatarStyle = { backgroundColor: '#1bbd7e' }
     const marginTop = { marginTop: 5 }
+
+    //alert style
+    const alert = {color: 'red'}
 
     // onChange Event Handlers
 
@@ -64,6 +72,11 @@ const Signup = () =>{
     // onSubmit
     const formSubmit = (form) =>{
        form.preventDefault()
+       setIsSubmit(true);
+       if(!name && !email && !phoneNo && !password && !cpassword && !gender){
+        // setName("");
+        return
+      }
         //console.log('Form Submitted==================', form);
         const userObj={
             name,
@@ -75,16 +88,16 @@ const Signup = () =>{
 
         }
         console.log('User-> Object', userObj);
+
     }
 
     useEffect(()=>{
-       // console.log('asim');
+
     },[])
 
+    console.log("name", name, "isSubmit", isSubmit);
     return (
-        <div style={{ marginTop: "10vh" }}>
-            {/* <h1 style={{ marginTop: "10vh" }}>Signup</h1> */}
-
+        <div style={{ marginTop: "5vh" }}>
             
             <Grid>
             <Paper style={paperStyle}>
@@ -99,10 +112,12 @@ const Signup = () =>{
                     <TextField fullWidth label='Name' placeholder="Enter your name" onChange={
                         (e)=>{namefield(e.target.value)}}
                     />
+                    {!name && isSubmit ?  <p style={alert}>  Name is required </p> : ""}
                     
                     <TextField fullWidth label='Email' placeholder="Enter your email" onChange={
                         (e)=>{ emailfield(e.target.value) }}
                     />
+                    {!email && isSubmit ?  <p style={alert}>  Email is required </p> : ""}
 
                     <FormControl component="fieldset" style={marginTop} onChange={
                         (e)=>{ genderfield(e.target.value) }}>
@@ -114,17 +129,22 @@ const Signup = () =>{
                         </RadioGroup>
                     </FormControl>
 
+                    {!gender && isSubmit ?  <p style={alert}>  Gender is required </p> : ""}
+
                     <TextField fullWidth label='Phone Number' placeholder="Enter your phone number"  onChange={
                         (e)=>{phonefield(e.target.value)}}
                     />
+                    {!phoneNo && isSubmit ?  <p style={alert}>  Phone No is required </p> : ""}
 
                     <TextField fullWidth label='Password' type='password' placeholder="Enter your password" onChange={
                         (e)=>{passwordfield (e.target.value) }}
                     />
+                    {!password && isSubmit ?  <p style={alert}>  Password is required </p> : ""}
 
                     <TextField fullWidth label='Confirm Password' type='password' placeholder="Confirm your password" onChange={
                         (e)=>{setpasswordfield(e.target.value)}}
                     />
+                    {!cpassword && isSubmit ?  <p style={alert}> Confirm Password is required </p> : ""}
 
                     <FormControlLabel
                         control={<Checkbox name="checkedA" />}
