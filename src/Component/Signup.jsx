@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 
 import { Grid, Paper, Avatar, Typography, TextField, 
-    Button, InputLabel, Link } from '@material-ui/core'
+    Button, Link } from '@material-ui/core'
 import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
@@ -20,9 +20,6 @@ const Signup = () =>{
     const [gender,setGender]=useState("");
     const [password,setPassword]=useState("");
     const [cpassword,setcPassword]=useState("");
-
-    const [nameError,setNameError]=useState("");
-    const [emailError,setEmailError]=useState("");
     
     const [isSubmit,setIsSubmit]=useState(false);
     

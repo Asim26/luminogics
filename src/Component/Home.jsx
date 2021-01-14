@@ -3,14 +3,13 @@ import { getUserAsync } from '../Services/dataService';
 
 import Header from './Header';
 
-import { withStyles, Theme, createStyles, makeStyles } from '@material-ui/core/styles';
+import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -42,15 +41,15 @@ export default function Home() {
 
   const [data, setData] = useState([0]);
 
-   const  getUsers = async() =>{
-    let response = await getUserAsync();
-    console.log('response',response);
-    setData(response);
-
-  }
 
   console.log('data',data);
-  useEffect(() => {
+  useEffect( async () => {
+   
+    const getUsers = async () =>{
+      let response = await getUserAsync();
+      console.log('response',response);
+      setData(response);
+    }
     getUsers();  
   },[])
 
@@ -70,7 +69,7 @@ export default function Home() {
                </TableRow>
              </TableHead>
              <TableBody>
-               {data.map((user) => (
+               {data && data.map((user) => (
                 <StyledTableRow key={user.id}>
                   <StyledTableCell component="th" scope="row">
                   {user.id}

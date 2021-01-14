@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
-import Home from './Home';
 import {Redirect} from 'react-router-dom';
 import { Grid, Paper, Avatar, TextField, Button, Link, Typography } from '@material-ui/core';
 import LockIcon from '@material-ui/icons/Lock';
-import createHistory from 'history'
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+
+import {userNameField1,passwordField1} from '../Utilities/constants';
 
 export default function Login() {
 
@@ -32,11 +32,14 @@ export default function Login() {
     }
 
 
+    
     //formLogin
     const formLogin = (e) =>{
         e.preventDefault()
 
-        if(userName =='asimmehmood@gmail.com' && password =='1234'){
+        if(userName === userNameField1 && password === passwordField1){
+            localStorage.setItem("isAuth",true)
+
             //redirect to home
             console.log('success');
             setLoginSuccess(true);
@@ -49,7 +52,6 @@ export default function Login() {
 
     return (
         <div style={{ marginTop: "10vh" }}>
-
             {!loginSuccess ? <Grid>
                 <Paper elevation={10} style={paperStyle}>
                     <Grid align='center'>
@@ -57,6 +59,7 @@ export default function Login() {
                             <LockIcon/>
                         </Avatar>
                         <h1>Sign in</h1>
+                        
                     </Grid>
                     <form onSubmit={formLogin}>
                         <TextField label='User Name' placeholder='Enter User Name'fullWidth required onChange={
@@ -77,14 +80,14 @@ export default function Login() {
                     </form>
 
                     <Typography>
-                        <Link href="#">
+                        <Link to ="/signup">
                             Forgot Password
                         </Link>
                     </Typography>
 
                     <Typography>
                         Don`t have an account?
-                        <Link href="/signup">
+                        <Link to ="/signup" >
                             Sign Up
                         </Link>
                     </Typography>
@@ -95,3 +98,8 @@ export default function Login() {
         </div>
     )
 }
+
+
+// Login.propTypes = {
+//     setToken: PropTypes.func.isRequired
+//   }

@@ -1,7 +1,10 @@
- 
+import {baseUrl } from '../Utilities/constants';
+
+//Home Data
 export const getUserAsync =  () => {
+    let URL = baseUrl + '/users'
     console.log('Fuction Called')
-    return  fetch(`https://jsonplaceholder.typicode.com/users`)
+    return  fetch(URL)
             .then(async (response)=> {
             console.log(response);
             return response.json()
@@ -11,4 +14,3 @@ export const getUserAsync =  () => {
     })
 }  
 
-// export default getUserAsync;
