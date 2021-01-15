@@ -2,16 +2,14 @@ import React, {useState, useEffect, Fragment} from 'react'
 
 // API Calling
 //import { getUserAsync } from './Services/dataService'
-import Login from './Component/Login';
-import Signup from './Component/Signup';
-
-import About from './Component/About';
-import Contact from './Component/Contact';
 import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
-import Home from './Component/Home';
+import LoginPage from './Component/Pages/LoginPage';
+import HomePage from './Component/Pages/HomePage';
+import AboutPage from './Component/Pages/AboutPage';
+import ContactPage from './Component/Pages/ContactPage';
+import SignUpPage from './Component/Pages/SignUpPage';
 
-
-function App() {
+function App(props) {
 
   const[isAuthState, setisAutheticated] = useState(false);
 
@@ -20,24 +18,26 @@ function App() {
     const isAutheticated = localStorage.getItem("isAuth");
     setisAutheticated(isAutheticated);
     console.log('=================', isAuthState, '++++', isAutheticated);
-  })
+  },[isAuthState])
 
   // const isAuth = localStorage.getItem("isAuth");
   console.log('IsAuth', isAuthState);
   
   
   return (
-    <Fragment>    
+    <Fragment>  
+      <div>
+        {/* Hi {props.name} */}
+      </div>  
       <BrowserRouter>
         <Switch>
-            <Route path="/" exact component={Login} />
-            { isAuthState ? 
-          
+            <Route path="/" exact component={LoginPage} />
+            { isAuthState ?           
             <>
-              <Route path="/home" exact component={Home} />
-              <Route path="/About" component={About} />
-              <Route path="/Contact" component={Contact} />
-              <Route path="/Signup" component={Signup} />
+              <Route path="/home" exact component={HomePage} />
+              <Route path="/About" component={AboutPage} />
+              <Route path="/Contact" component={ContactPage} />
+              <Route path="/Signup" component={SignUpPage} />
               </>
             : <Redirect to='/' />  }
 
@@ -47,4 +47,7 @@ function App() {
   );
 }
 
+// App.defaultProps = {
+//   name:'Ali'
+// }
 export default App;
