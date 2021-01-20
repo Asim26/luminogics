@@ -8,6 +8,7 @@ import HomePage from './Component/Pages/HomePage';
 import AboutPage from './Component/Pages/AboutPage';
 import ContactPage from './Component/Pages/ContactPage';
 import SignUpPage from './Component/Pages/SignUpPage';
+import NotFound from './Component/Pages/NotFound';
 
 function App(props) {
 
@@ -38,11 +39,13 @@ function App(props) {
               <Route path="/About" component={AboutPage} />
               <Route path="/Contact" component={ContactPage} />
               <Route path="/Signup" component={SignUpPage} />
+              {/* <Route component={NotFound} /> */}
               </>
             : <Redirect to='/' />  }
 
         </Switch>
       </BrowserRouter>
+
     </Fragment>
   );
 }

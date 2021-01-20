@@ -14,3 +14,16 @@ export const getUserAsync =  () => {
     })
 }  
 
+//Posts Data
+export const getPostsAsync =  () => {
+    let URL = baseUrl + '/posts'
+    // console.log('Fuction Called')
+    return  fetch(URL)
+            .then(async (response)=> {
+            console.log(response);
+            return response.json()
+        })
+    .catch(err=> {
+        console.log(err);
+    })
+}

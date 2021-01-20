@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Redirect} from 'react-router-dom';
 import { Grid, Paper, Avatar, TextField, Button, Link, Typography } from '@material-ui/core';
 import LockIcon from '@material-ui/icons/Lock';
@@ -7,7 +7,11 @@ import Checkbox from '@material-ui/core/Checkbox';
 
 import {userNameField1,passwordField1} from '../Utilities/constants';
 
-export default function Login() {
+import {getPostsAsync} from '../Services/dataService';
+import {connect} from 'react-redux'
+import {fetchPosts} from '../Redux/Actions/action'
+
+function Login(props) {
 
     //login State variables
     const [userName,setuserName]=useState("");
@@ -31,18 +35,30 @@ export default function Login() {
         setPassword(userPassword)
     }
 
+    //Api Call
+    // useEffect(async()=>{
+    //     let response_posts = await getPostsAsync();
+    //     console.log('response posts login',response_posts);
+    //     console.log('props ',props)
 
+        
+    // },[])
     
     //formLogin
-    const formLogin = (e) =>{
+    const formLogin = async (e) =>{
         e.preventDefault()
 
         if(userName === userNameField1 && password === passwordField1){
             localStorage.setItem("isAuth",true)
 
             //redirect to home
-            console.log('success');
+            console.log('success', props);
             setLoginSuccess(true);
+            
+            let response_posts = await getPostsAsync();
+            // post_data
+            props.fetchPosts(response_posts);
+        
         }
         else{
             //redirect to log in
@@ -100,6 +116,16 @@ export default function Login() {
 }
 
 
-// Login.propTypes = {
-//     setToken: PropTypes.func.isRequired
-//   }
+
+const mapStateToProps=state=>({
+    data:state.usersPostsData
+})
+
+const mapDispatchToProps=dispatch=>{
+    return{
+      fetchPosts: (posts)=>dispatch(fetchPosts(posts))
+    };
+   };
+   
+export default connect(null ,mapDispatchToProps)(Login)
+

@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
-import { getUserAsync } from '../Services/dataService';
+import { getUserAsync, getPostsAsync } from '../Services/dataService';
 
 import Header from './Header';
-
+import {fetchUsers,fetchPosts} from '../Redux/Actions/action'
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -10,6 +10,8 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+
+import {connect} from 'react-redux'
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -35,27 +37,27 @@ const useStyles = makeStyles({
   },
 });
 
-export default function Home() {
+function Home(props) {
 
   const classes = useStyles();
 
   const [data, setData] = useState([0]);
 
 
-  console.log('data',data);
   useEffect( async () => {
    
     const getUsers = async () =>{
+
       let response = await getUserAsync();
-      console.log('response',response);
       setData(response);
+
+      props.fetchUsers(response)
     }
     getUsers();  
   },[])
 
     return (
         <div>
-            {/* <h2>Home</h2> */}
             <Header />
             <TableContainer >
            <Table className={classes.table} aria-label="customized table">
@@ -87,3 +89,11 @@ export default function Home() {
         </div>
     )
 }
+
+const mapDispatchToProps=dispatch=>{
+ return{
+   fetchUsers: (users)=>dispatch(fetchUsers(users))
+ };
+};
+
+export default connect(null ,mapDispatchToProps)(Home)
