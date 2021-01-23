@@ -5,37 +5,46 @@ const initialState = {
     usersPostsData:[]
 }
 
-// fetch user data
 export default function fetchUsersData(state = [], action) {
     switch (action.type) {
         case FETCH_DATA:
-
-        return [
+        console.log('fetch user data reducer',state)
+        return {
                 ...state,
-                {fetchUsersData: action.data}
-            ]            
+                fetchUsersData: action.data
+        }         
+        
+        case FETCH_POSTS:
+ 
+            return {
+                ...state,
+                usersPostsData: action.data
+            };     
 
         default:
             return state
     }
-
 
 }
 
 // userPostData
-export function usersPostsData(state = [], action) {
-    switch (action.type) {
-        case FETCH_POSTS:
+// export function usersPostsData(state = initialState , action) {
+//     switch (action.type) {
+//         case FETCH_DATA:
+//         console.log('fetch user data reducer',state)
+//         return {
+//                 ...state,
+//                 fetchUsersData: action.data
+//         }         
+        
+//         case FETCH_POSTS:
+ 
+//             return {
+//                 ...state,
+//                 usersPostsData: action.data
+//             };     
 
-            
-            return [
-                ...state,
-                {usersPostsData: action.data}
-            ]            
-
-        default:
-            return state
-    }
-
-
-}
+//         default:
+//             return state
+//     }
+// }

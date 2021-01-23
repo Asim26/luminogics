@@ -9,7 +9,7 @@ export const fetchUsers =(data)=>{
 }
 
 export const fetchPosts =(data)=>{
-  
+    console.log('post data from action ',data)
     return {
         type:FETCH_POSTS,
         data:data

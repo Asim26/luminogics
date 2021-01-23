@@ -9,6 +9,7 @@ import AboutPage from './Component/Pages/AboutPage';
 import ContactPage from './Component/Pages/ContactPage';
 import SignUpPage from './Component/Pages/SignUpPage';
 import NotFound from './Component/Pages/NotFound';
+import UserPostPage from './Component/Pages/UserPostPage';
 
 function App(props) {
 
@@ -18,8 +19,9 @@ function App(props) {
   useEffect(() => {
     const isAutheticated = localStorage.getItem("isAuth");
     setisAutheticated(isAutheticated);
+
     console.log('=================', isAuthState, '++++', isAutheticated);
-  },[isAuthState])
+  },[localStorage.getItem("isAuth")])
 
   // const isAuth = localStorage.getItem("isAuth");
   console.log('IsAuth', isAuthState);
@@ -38,6 +40,7 @@ function App(props) {
               <Route path="/home" exact component={HomePage} />
               <Route path="/About" component={AboutPage} />
               <Route path="/Contact" component={ContactPage} />
+              <Route path="/userPost" component={UserPostPage} />
               <Route path="/Signup" component={SignUpPage} />
               {/* <Route component={NotFound} /> */}
               </>

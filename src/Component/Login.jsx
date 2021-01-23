@@ -43,6 +43,7 @@ function Login(props) {
 
         
     // },[])
+
     
     //formLogin
     const formLogin = async (e) =>{
@@ -56,8 +57,10 @@ function Login(props) {
             setLoginSuccess(true);
             
             let response_posts = await getPostsAsync();
+            console.log('API response', response_posts)
             // post_data
             props.fetchPosts(response_posts);
+        
         
         }
         else{
@@ -118,7 +121,7 @@ function Login(props) {
 
 
 const mapStateToProps=state=>({
-    data:state.usersPostsData
+    posts:state.usersPostsData
 })
 
 const mapDispatchToProps=dispatch=>{

@@ -90,10 +90,11 @@ function Home(props) {
     )
 }
 
+
 const mapDispatchToProps=dispatch=>{
  return{
    fetchUsers: (users)=>dispatch(fetchUsers(users))
  };
 };
 
-export default connect(null ,mapDispatchToProps)(Home)
+export default connect(null,mapDispatchToProps)(Home)

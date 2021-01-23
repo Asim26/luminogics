@@ -20,7 +20,7 @@ export const getPostsAsync =  () => {
     // console.log('Fuction Called')
     return  fetch(URL)
             .then(async (response)=> {
-            console.log(response);
+            console.log('posts data', response);
             return response.json()
         })
     .catch(err=> {
